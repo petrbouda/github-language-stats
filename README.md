@@ -8,7 +8,7 @@ It's based on REST Github API:
 
 ## Building
 
-- Application is based on Java 19 and can be built using Maven (Java 19 needs to be installed locally):
+Application is based on Java 19 and can be built using Maven (Java 19 needs to be installed locally):
 
 ```
 mvn clean package
