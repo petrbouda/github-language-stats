@@ -6,6 +6,18 @@ It's based on REST Github API:
 - https://docs.github.com/en/rest/repos/repos#list-organization-repositories - retrieves all repositories in a single organization
 - https://docs.github.com/en/rest/repos/repos#list-repository-languages - returns a collection of used languages and the number of bytes
 
+## Obstacles
+
+- The project contains a pre-generated API Github Token, otherwise, it's really not possible to effectively work with it. 
+Everyone can generate the token and pass it into the configuration `application.properties` file to be able to make more 
+than tens of requests to Github REST API.
+- Github automatically revokes the personal tokens during the `git push` that means that everyone who wants to run this app 
+needs to generate and configure the token on your own.
+
+```
+Account -> Settings -> Developer Settings -> Personal Access Tokens -> Token (classic)
+```
+
 ## Building
 
 Application is based on Java 19 and can be built using Maven (Java 19 needs to be installed locally):
@@ -107,14 +119,3 @@ dependencies and writing some piece of code based only on OpenJDK. e.g.:
 - Better parallelism in a case of paging the repositories. Current Github API does not provide (I haven't found at least) 
 any good/predictable way to download multiple pages in parallel. We could blindly guess and prefetch some pages using additional 
 HTTP Requests and speculates that they contain some data.
-
-## Obstacles
-
-- The project contains a pre-generated API Github Token, otherwise, it's really not possible to effectively work with it. 
-Everyone can generate the token and pass it into the configuration `application.properties` file to be able to make more 
-than tens of requests to Github REST API.
-- Current API Token won't be active longer than one week (honestly, not sure how it actually works, I mean Github tokens...)
-
-```
-Account -> Settings -> Developer Settings -> Personal Access Tokens -> Token (classic)
-```
